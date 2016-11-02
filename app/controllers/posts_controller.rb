@@ -4,17 +4,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.limit(20).order(created_at: :desc)
+
+    @post = Post.new
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
-  end
-
-  # GET /posts/new
-  def new
-    @post = Post.new
   end
 
   # GET /posts/1/edit
