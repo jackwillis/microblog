@@ -1,0 +1,9 @@
+<h2>Posts for #<%= @hashtag %></h2>
+
+<% @posts.each do |post| %>
+  <%= render 'post', post: post %>
+<% end %>
+
+<% if @posts.empty? %>
+  <p>No posts for #<%= @hashtag %></p>
+<% end %>
