@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102175708) do
+ActiveRecord::Schema.define(version: 20161102182558) do
+
+  create_table "hashtag_indices", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "hashtag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashtag"], name: "index_hashtag_indices_on_hashtag"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.text     "body"
