@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   }
 
   def hashtags
-    body.scan(/\#(\w+)/).map { |h| h.first.downcase }
+    body.scan(/\#(\w+)/).map { |h| h[0].downcase }.uniq
   end
 
   private

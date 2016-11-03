@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/', to: 'posts#index'
+  root 'posts#index'
   get '/h/:hashtag', to: 'posts#hashtag', as: 'hashtag'
 
   resources :posts
