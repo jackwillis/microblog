@@ -1,4 +1,5 @@
 <div class="post">
+  <header><%= profile_link(post.user) %></header>
   <p><%= post_body_with_links(post) %></p>
   <footer><%= post_time_tag(post) %></footer>
 </div>

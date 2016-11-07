@@ -7,8 +7,8 @@ foo = User.create({
 
 foo.posts.create({
   body: "Making #posts on #my #website is #fun!"
-})
-
-foo.posts.create({
+}, {
   body: "Can't stop making #posts!"
+}, {
+  body: "postssss"
 })
