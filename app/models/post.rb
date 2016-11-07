@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   has_many :hashtag_indices
-  belongs_to :user
+  belongs_to :user, counter_cache: true
 
   after_create :create_hashtag_indices
 
