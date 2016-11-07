@@ -51,5 +51,5 @@ class User < ApplicationRecord
   end
 
   def following; leaders; end
-  def following_count; leader_count; end
+  def following_count; leaders_count; end
 end

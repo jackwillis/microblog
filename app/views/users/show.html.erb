@@ -1,8 +1,8 @@
 <h2><%= profile_link(@user) %></h2>
 
-<h3>Posts: <%= @user.posts.count %></h3>
-<h3>Following: <%= @user.follower_count %></h3>
-<h3>Followers: <%= @user.follower_count %></h3>
+<h3>Posts: <%= @user.posts_count %></h3>
+<h3>Following: <%= @user.following_count %></h3>
+<h3>Followers: <%= @user.followers_count %></h3>
 
 
 <% @posts.each do |post| %>
