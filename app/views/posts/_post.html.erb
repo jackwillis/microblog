@@ -1,7 +1,4 @@
-<hr>
-
-<p><%= post_body_with_links post %></p>
-
-<p><small>Posted on <%= link_to post.created_at, post %></small></p>
-
-<hr>
+<div class="post">
+  <p><%= post_body_with_links(post) %></p>
+  <footer><%= post_time_tag(post) %></footer>
+</div>

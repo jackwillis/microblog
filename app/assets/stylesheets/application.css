@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font: 20px/24px "Segoe UI", Frutiger, "Frutiger Linotype", "DejaVu Sans", "Helvetica Neue", Arial, sans-serif;
+  margin-left: 8em;
+}
