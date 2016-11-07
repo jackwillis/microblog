@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107004613) do
+ActiveRecord::Schema.define(version: 20161107023345) do
+
+  create_table "follows", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "leader_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["leader_id"], name: "index_follows_on_leader_id"
+  end
 
   create_table "hashtag_indices", force: :cascade do |t|
     t.integer  "post_id"
