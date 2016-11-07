@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @user = @user
     @posts = @user.posts.limit(10)
   end
 

@@ -4,13 +4,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.limit(20).order(created_at: :desc)
+    @posts = Post.includes(:user).limit(20).order(created_at: :desc)
     @post = Post.new
   end
 
   def hashtag
     @hashtag = params[:hashtag]
     @posts = Post.with_hashtag(@hashtag)
+    @posts_count = @posts.count
   end
 
   # GET /posts/1

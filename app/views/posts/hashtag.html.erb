@@ -1,4 +1,4 @@
-<h2>Posts for #<%= @hashtag %></h2>
+<h2>Posts for #<%= @hashtag %> (<%= @posts_count %> total)</h2>
 
 <% @posts.each do |post| %>
   <%= render 'post', post: post %>

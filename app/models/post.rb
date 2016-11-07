@@ -1,11 +1,15 @@
 class Post < ApplicationRecord
-  has_many :hashtag_indices
-  belongs_to :user, counter_cache: true
-
+  has_many :hashtag_indices, dependent: :destroy
   after_create :create_hashtag_indices
+  
+  belongs_to :user, counter_cache: true
 
   scope :with_hashtag, -> (hashtag) {
     joins(:hashtag_indices).where(hashtag_indices: { hashtag: hashtag })
+  }
+
+  scope :followed_posts_for, -> (user) {
+    joins(:user).where(users: { id: user.leaders })
   }
 
   def hashtags
