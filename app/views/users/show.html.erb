@@ -1,0 +1,10 @@
+<h2><%= profile_link(@user) %></h2>
+
+<h3>Posts: <%= @user.posts.count %></h3>
+<h3>Following: <%= @user.follower_count %></h3>
+<h3>Followers: <%= @user.follower_count %></h3>
+
+
+<% @posts.each do |post| %>
+  <%= render 'posts/post', post: post %>
+<% end %>

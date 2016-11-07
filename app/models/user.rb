@@ -18,6 +18,8 @@ class User < ApplicationRecord
     dependent: :destroy
   }
 
+  def to_param; username; end
+
   def follow(other)
     return true if follows?(other)
 

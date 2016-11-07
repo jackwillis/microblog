@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
-  root 'posts#index'
-  get '/h/:hashtag', to: 'posts#hashtag', as: 'hashtag'
+  root to: 'posts#index'
 
   resources :posts
+
+  get '/h/:hashtag', to: 'posts#hashtag', as: 'hashtag'
+
+  get '/u/:username', to: 'users#show', as: 'user'
+
+  devise_for :users
 end
