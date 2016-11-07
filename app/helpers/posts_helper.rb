@@ -1,9 +1,19 @@
 module PostsHelper
   def post_body_with_links(post)
-    sanitize post.body.gsub(/\#(\w+)/) { |match|
-      link_to match, hashtag_path(match[1..-1])
-    }
+    sanitize(with_hashtag_links(with_username_links(post.body)))
   end
+
+  private
+
+    def with_hashtag_links(s)
+      s.gsub(/\#(\w+)/) { |match| link_to match, hashtag_path(match[1..-1]) }
+    end
+
+    def with_username_links(s)
+      s.gsub(/\@(\w+)/) { |match| link_to match, user_path(match[1..-1]) }
+    end
+
+  public
 
   def post_time_tag(post)
     time = post.created_at
