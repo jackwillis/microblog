@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107023345) do
+ActiveRecord::Schema.define(version: 20161107040246) do
 
   create_table "follows", force: :cascade do |t|
     t.integer  "follower_id"
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 20161107023345) do
     t.datetime "updated_at",                          null: false
     t.string   "username"
     t.string   "handle"
+    t.integer  "follower_count"
+    t.integer  "leader_count"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username"

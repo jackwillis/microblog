@@ -6,8 +6,17 @@ class User < ApplicationRecord
   
   has_many :posts
 
-  has_many :followerships, class_name: :Follow, foreign_key: :leader_id
-  has_many :leaderships, class_name: :Follow, foreign_key: :follower_id
+  has_many :followerships, {
+    class_name: :Follow,
+    foreign_key: :leader_id,
+    dependent: :destroy
+  }
+
+  has_many :leaderships, {
+    class_name: :Follow,
+    foreign_key: :follower_id,
+    dependent: :destroy
+  }
 
   def follow(other)
     return true if follows?(other)
@@ -16,9 +25,11 @@ class User < ApplicationRecord
   end
 
   def unfollow(other)
-    return true unless follows?(other)
+    followship = Follow.where(follower: self, leader: other).first
 
-    Follow.where(follower: self, leader: other).delete_all
+    return true unless followship
+
+    followship.destroy
   end
 
   def follows?(other)
@@ -37,5 +48,6 @@ class User < ApplicationRecord
     User.joins(:followerships).where(follows: { follower_id: id })
   end
 
-  alias_method :following, :leaders
+  def following; leaders; end
+  def following_count; leader_count; end
 end
