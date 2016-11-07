@@ -21,17 +21,11 @@ class User < ApplicationRecord
   def to_param; username; end
 
   def follow(other)
-    return true if follows?(other)
-
-    Follow.create(follower: self, leader: other)
+    Follow.find_or_create_by(follower: self, leader: other)
   end
 
   def unfollow(other)
-    followship = Follow.where(follower: self, leader: other).first
-
-    return true unless followship
-
-    followship.destroy
+    Follow.find_by(follower: self, leader: other)&.destroy
   end
 
   def follows?(other)
