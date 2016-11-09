@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User do
+describe User, '#follow' do
   it 'follows users' do
     foo, bar, baz = create_list(:user, 3)
 
@@ -22,7 +22,9 @@ describe User do
 
     expect(bar.followers).to eq([foo, baz])
   end
+end
 
+describe User, '#unfollow' do
   it 'unfollows users' do
     foo, bar = create_list(:user, 2)
 
@@ -34,7 +36,9 @@ describe User do
     
     expect(!foo.follows?(bar))
   end
+end
 
+describe User, '#followers_count, #following_count' do
   it 'tracks follower counts' do
     foo, bar, baz = create_list(:user, 3)
 
