@@ -1,6 +1,7 @@
 require 'database_cleaner'
 require 'factory_girl'
 require 'factories'
+require 'simplecov'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -47,3 +48,5 @@ RSpec.configure do |config|
   end
 
 end
+
+SimpleCov.start :rails

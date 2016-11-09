@@ -37,6 +37,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.2'
   gem 'database_cleaner', '~> 1.5.3'
   gem 'factory_girl', '~> 4.7.0'
+  gem 'simplecov', '~> 0.12.0'
 end
 
 group :development do
