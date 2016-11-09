@@ -6,10 +6,21 @@ describe User do
 
     foo.follow(bar)
 
-    expect(foo.following).to include(bar)
-    expect(foo.following).to_not include(baz)
-    expect(bar.following).to_not include(foo)
-    expect(bar.followers).to include(foo)
+    expect(foo.follows?(bar))
+    expect(!foo.follows?(baz))
+    expect(!bar.follows?(foo))
+    expect(bar.leads?(foo))
+
+    expect(foo.following).to eq([bar])
+
+    foo.follow(baz)
+    foo.reload
+
+    expect(foo.following).to eq([bar, baz])
+
+    baz.follow(bar)
+
+    expect(bar.followers).to eq([foo, baz])
   end
 
   it 'unfollows users' do
@@ -17,11 +28,11 @@ describe User do
 
     foo.follow(bar)
 
-    expect(foo.following).to include(bar)
+    expect(foo.follows?(bar))
 
     foo.unfollow(bar)
     
-    expect(foo.following).to_not include(bar)
+    expect(!foo.follows?(bar))
   end
 
   it 'tracks follower counts' do
