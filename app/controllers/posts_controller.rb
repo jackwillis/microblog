@@ -3,22 +3,15 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   def index
-    @posts = Post
-              .includes(:user)
-              .page(params[:page]).order(created_at: :desc)
-
+    @posts = page(timeline_posts)
     @post = Post.new
   end
 
   def hashtag
     @hashtag = params[:hashtag]
 
-    @posts = Post
-              .includes(:user).references(:user)
-              .with_hashtag(@hashtag)
-              .page(params[:page]).order(created_at: :desc)
-
-    @posts_count = Post.with_hashtag(@hashtag).count
+    @posts = page(hashtag_posts)
+    @posts_count = hashtag_posts.count
   end
 
   # GET /posts/1
@@ -80,5 +73,22 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:body)
+    end
+
+    def timeline_posts
+      if user_signed_in?
+        Post.followed_posts_for(current_user)
+      else
+        Post.all
+      end
+        .includes(:user)
+    end
+
+    def hashtag_posts
+      Post.includes(:user).references(:user).with_hashtag(params[:hashtag])
+    end
+
+    def page(posts)
+      posts.page(params[:page]).order(created_at: :desc)
     end
 end
