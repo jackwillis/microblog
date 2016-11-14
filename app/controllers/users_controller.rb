@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @posts = @user.posts.limit(10)
+    @posts = @user.posts
+               .page(params[:page]).order(created_at: :desc)
   end
 
   private

@@ -7,3 +7,5 @@
 <% if @posts.empty? %>
   <p>No posts for #<%= @hashtag %></p>
 <% end %>
+
+<%= will_paginate @posts %>

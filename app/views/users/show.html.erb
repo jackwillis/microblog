@@ -8,3 +8,6 @@
 <% @posts.each do |post| %>
   <%= render 'posts/post', post: post %>
 <% end %>
+
+
+<%= will_paginate @posts %>

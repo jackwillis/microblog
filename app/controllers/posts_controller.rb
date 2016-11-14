@@ -2,17 +2,22 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
-
-  # GET /posts
-  # GET /posts.json
   def index
-    @posts = Post.includes(:user).limit(20).order(created_at: :desc)
+    @posts = Post
+              .includes(:user)
+              .page(params[:page]).order(created_at: :desc)
+
     @post = Post.new
   end
 
   def hashtag
     @hashtag = params[:hashtag]
-    @posts = Post.includes(:user).references(:user).with_hashtag(@hashtag)
+
+    @posts = Post
+              .includes(:user).references(:user)
+              .with_hashtag(@hashtag)
+              .page(params[:page]).order(created_at: :desc)
+
     @posts_count = Post.with_hashtag(@hashtag).count
   end
 

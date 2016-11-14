@@ -9,7 +9,7 @@ foo = User.create!({
 require "securerandom"
 
 foo.posts.create!(Array.new(30) {
-  { body: SecureRandom.base64 }
+  { body: "#testdata #{SecureRandom.base64}" }
 })
 
 foo.posts.create!([
