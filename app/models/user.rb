@@ -1,10 +1,31 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  def to_param; username; end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
   has_many :posts, dependent: :destroy
+
+  has_many :post_likes, {
+    dependent: :destroy,
+    counter_cache: :liked_posts_count
+  }
+
+  def like(post)
+    PostLike.find_or_create_by(user: self, post: post)
+  end
+
+  def unlike(post)
+    PostLike.find_by(user: self, post: post)&.destroy
+  end
+
+  def likes?(post)
+    post_likes.exists?(post: post)
+  end
+
+  def liked_posts
+    Post.likes_for(self)
+  end
 
   has_many :followerships, {
     class_name: :Follow,
@@ -17,8 +38,6 @@ class User < ApplicationRecord
     foreign_key: :follower_id,
     dependent: :destroy
   }
-
-  def to_param; username; end
 
   def follow(other)
     Follow.find_or_create_by(follower: self, leader: other)

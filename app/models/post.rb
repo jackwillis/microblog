@@ -1,10 +1,24 @@
 class Post < ApplicationRecord
-  has_many :hashtag_indices, dependent: :destroy
-  after_create :create_hashtag_indices
-  
+  # Users
+  #
   belongs_to :user, counter_cache: true
 
+  # Pagination
+  #
   self.per_page = 20
+
+  # Likes
+  #
+  has_many :post_likes, dependent: :destroy
+
+  scope :likes_for, -> (user) {
+    where(id: user.post_likes.select(:post_id))
+  }
+
+  # Hashtags
+  #
+  has_many :hashtag_indices, dependent: :destroy
+  after_create :create_hashtag_indices
 
   scope :with_hashtag, -> (hashtag) {
     joins(:hashtag_indices).where(hashtag_indices: { hashtag: hashtag })

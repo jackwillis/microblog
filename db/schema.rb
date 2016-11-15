@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107180846) do
+ActiveRecord::Schema.define(version: 20161115054229) do
 
   create_table "follows", force: :cascade do |t|
     t.integer  "follower_id"
@@ -29,11 +29,21 @@ ActiveRecord::Schema.define(version: 20161107180846) do
     t.index ["hashtag"], name: "index_hashtag_indices_on_hashtag"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.text     "body"
+  create_table "post_likes", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_likes_on_post_id"
+    t.index ["user_id"], name: "index_post_likes_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text     "body"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "user_id"
+    t.integer  "likes_count", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -55,6 +65,7 @@ ActiveRecord::Schema.define(version: 20161107180846) do
     t.integer  "followers_count",        default: 0
     t.integer  "leaders_count",          default: 0
     t.integer  "posts_count",            default: 0
+    t.integer  "liked_posts_count",      default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username"
