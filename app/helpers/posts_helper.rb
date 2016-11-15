@@ -20,9 +20,9 @@ module PostsHelper
     now = Time.zone.now
 
     link = if now.ago(2.hours) < time
-      "Posted " + link_to(distance_of_time_in_words(time, now) + " ago", post)
+      link_to(distance_of_time_in_words(time, now) + " ago", post)
     else
-      "Posted on " + link_to(time.strftime("%a, %b %-d, %Y, %l:%S %p"), post)
+      "on " + link_to(time.strftime("%a, %b %-d, %Y, %l:%S %p"), post)
     end
 
     time_tag time, link.html_safe, title: time.rfc2822

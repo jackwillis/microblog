@@ -1,5 +1,10 @@
 <div class="post">
-  <header><%= profile_link(post.user) %></header>
+  <header>
+    <%= profile_link(post.user) %>
+    <small>posted <%= post_time_tag(post) %>:</small>
+  </header>
+
   <p><%= post_body_with_links(post) %></p>
-  <footer><%= post_time_tag(post) %></footer>
+  
+  <footer>&#x2764; <tt><%= post.likes_count %></tt></footer>
 </div>
