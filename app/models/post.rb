@@ -1,4 +1,7 @@
 class Post < ApplicationRecord
+  before_create :create_token
+  def to_param; token.to_s; end
+
   # Users
   #
   belongs_to :user, counter_cache: true
@@ -40,5 +43,9 @@ class Post < ApplicationRecord
         hashtag: hashtag
       }
     })
+  end
+
+  def create_token
+    self.token = 10.times.map { SecureRandom.random_number(9) }.join.to_i
   end
 end
