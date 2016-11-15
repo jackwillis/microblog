@@ -11,6 +11,8 @@ Twitter clone.
 * Profile page
 * Settings page
 * Full tests
+* Write validations for all the models
+* Incorporate ReactJS
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
