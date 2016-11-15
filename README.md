@@ -1,4 +1,16 @@
-# README
+# microblog
+
+Twitter clone.
+
+## TODO:
+
+* Interface for following/unfollowing users
+* Liking posts
+* Reposting others' posts
+* Notifications page
+* Profile page
+* Settings page
+* Full tests
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

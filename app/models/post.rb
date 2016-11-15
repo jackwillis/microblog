@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   
   belongs_to :user, counter_cache: true
 
-  self.per_page =20
+  self.per_page = 20
 
   scope :with_hashtag, -> (hashtag) {
     joins(:hashtag_indices).where(hashtag_indices: { hashtag: hashtag })
