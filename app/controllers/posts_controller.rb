@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :unlike]
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   def index
@@ -64,6 +64,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    if current_user.like(@post)
+      flash[:notice] = "Liked post"
+    else
+      flash[:alert] = "Did not like post"
+    end
+
+    redirect_to @post
+  end
+
+  def unlike
+    if current_user.unlike(@post)
+      flash[:notice] = "Unliked post"
+    else
+      flash[:alert] = "Did not unlike post"
+    end
+
+    redirect_to @post
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -76,16 +96,19 @@ class PostsController < ApplicationController
     end
 
     def timeline_posts
-      if user_signed_in?
+      posts = if user_signed_in?
         Post.followed_posts_for(current_user)
       else
         Post.all
       end
-        .includes(:user)
+      
+      posts.includes(:user, :post_likes)
     end
 
     def hashtag_posts
-      Post.includes(:user).references(:user).with_hashtag(params[:hashtag])
+      posts = Post.with_hashtag(params[:hashtag])
+
+      posts.includes(:user, :post_likes)
     end
 
     def page(posts)

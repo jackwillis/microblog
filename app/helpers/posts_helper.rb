@@ -27,4 +27,14 @@ module PostsHelper
 
     time_tag time, link.html_safe, title: time.rfc2822
   end
+
+  def like_button(post)
+    return "\u2764" unless user_signed_in?
+    
+    if current_user.likes?(post)
+      button_to "( \u2764 )", unlike_post_path(post), method: :delete, class: "like_button liked"
+    else
+      button_to "\u2764", like_post_path(post), class: "like_button unliked"
+    end
+  end
 end

@@ -40,11 +40,11 @@ ActiveRecord::Schema.define(version: 20161115065909) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "body"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "user_id"
-    t.integer  "likes_count",            default: 0
-    t.integer  "token",       limit: 10
+    t.integer  "likes_count", default: 0
+    t.string   "token"
     t.index ["token"], name: "index_posts_on_token"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end

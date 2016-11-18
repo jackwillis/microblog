@@ -6,5 +6,8 @@
 
   <p><%= post_body_with_links(post) %></p>
   
-  <footer>&#x2764; <tt><%= post.likes_count %></tt></footer>
+  <footer>
+    <%= like_button(post) %>
+    <tt><%= post.likes_count %></tt>
+  </footer>
 </div>

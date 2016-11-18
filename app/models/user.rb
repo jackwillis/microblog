@@ -20,7 +20,12 @@ class User < ApplicationRecord
   end
 
   def likes?(post)
-    post_likes.exists?(post: post)
+    post_likes = post.post_likes
+    if post_likes.loaded?
+      post_likes.find { |pl| pl.user_id == id }
+    else
+      post_likes.exists?(user: self)
+    end
   end
 
   def liked_posts

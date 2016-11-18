@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   before_create :create_token
-  def to_param; token.to_s; end
+  def to_param; token; end
 
   # Users
   #
@@ -46,6 +46,6 @@ class Post < ApplicationRecord
   end
 
   def create_token
-    self.token = 10.times.map { SecureRandom.random_number(9) }.join.to_i
+    self.token = 10.times.map { SecureRandom.random_number(9) }.join
   end
 end
