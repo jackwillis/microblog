@@ -5,9 +5,9 @@ Twitter clone.
 ## TODO:
 
 * Interface for following/unfollowing users
-* Liking posts
+* ~~Liking posts~~
 * Reposting others' posts
-* Notifications page
+* ~~Notifications page~~
 * Profile page
 * Settings page
 * Full tests
