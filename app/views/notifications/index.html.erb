@@ -1,6 +1,6 @@
 <ul class="notifications">
   <% @notifications.each do |notification| %>
-    <li>
+    <li class="<%= notification.unread? ? 'unread' : 'read' %>">
       <%= render_notification_partial(notification) %>
     </li>
   <% end %>

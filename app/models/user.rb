@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  def unread_notifications_count
+    notifications.unread.count
+  end
+
   has_many :post_likes, {
     dependent: :destroy,
     counter_cache: :liked_posts_count

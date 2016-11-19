@@ -9,4 +9,15 @@ class Notification < ApplicationRecord
   scope :with_polymorphic_preloads, -> {
     preload(post_like: [:post, :user], follow: [:follower])
   }
+
+  scope :unread, -> { where(read_at: nil) }
+  scope :read, -> { where.not(read_at: nil) }
+
+  def unread?
+    read_at.nil?
+  end
+
+  def read?
+    !read_at.nil?
+  end
 end
