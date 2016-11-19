@@ -8,4 +8,14 @@ class Follow < ApplicationRecord
     class_name: :User,
     counter_cache: :leaders_count
   }
+  
+  has_one :notification, as: :subject, dependent: :destroy
+
+  after_create :create_notifications
+
+  private
+
+  def create_notifications
+    Notification.create(subject: self, user: leader)
+  end
 end

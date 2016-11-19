@@ -17,6 +17,7 @@
       <% if user_signed_in? %>
         You are logged in as <%= link_to "@#{current_user.username}", user_path(current_user) %>.
         <%= link_to '(Sign out)', destroy_user_session_path, method: :delete %>.
+        <%= link_to 'Notifications', notifications_path %>.
       <% else %>
         Why not
         <%= link_to 'log in', new_user_session_path %> or

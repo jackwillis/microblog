@@ -1,0 +1,8 @@
+<ul>
+<% @notifications.each do |notification| %>
+  <li>
+    <%= render notification.subject_type.underscore,
+            follow: notification.follow, post_like: notification.post_like %>
+  </li>
+<% end %>
+</ul>

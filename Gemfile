@@ -12,7 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.2.0'
 gem 'will_paginate', '~> 3.1.0'
-
+gem 'activerecord_lax_includes', github: 'brigade/active-record-lax-includes'
 
 group :development, :test do
   gem 'byebug', platform: :mri

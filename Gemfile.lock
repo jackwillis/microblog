@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/brigade/active-record-lax-includes.git
+  revision: 19f18e151b624ff72896f5c6642118d9e9c730d3
+  specs:
+    activerecord_lax_includes (0.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -204,6 +210,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord_lax_includes!
   byebug
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.5.3)

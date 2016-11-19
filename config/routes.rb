@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   get '/tag/:hashtag', to: 'posts#hashtag', as: 'hashtag'
   get '/@:username', to: 'users#show', as: 'user'
+
+  get '/notifications', to: 'notifications#index', as: 'notifications'
 end
