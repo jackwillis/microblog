@@ -51,3 +51,9 @@ baz.follow(bar)
 baz.posts.create!(
   { body: "postsss!" }
 )
+
+Post.where.not(user: foo).each do |p| foo.like(p) end
+
+bar.like(Post.where(user: foo).last)
+
+Post.where(user: foo).first(5).each do |p| baz.like(p) end
