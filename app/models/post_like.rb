@@ -9,6 +9,7 @@ class PostLike < ApplicationRecord
   private
 
   def create_notifications
-    Notification.create(subject: self, user: post.user)
+    return if user_id == post.user_id
+    Notification.create(subject: self, user_id: post.user_id)
   end
 end
