@@ -16,6 +16,8 @@ class User < ApplicationRecord
     counter_cache: :liked_posts_count
   }
 
+  has_many :username_mentions
+
   def like(post)
     PostLike.find_or_create_by(user: self, post: post)
   end

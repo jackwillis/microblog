@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118203047) do
+ActiveRecord::Schema.define(version: 20161120051036) do
 
   create_table "follows", force: :cascade do |t|
     t.integer  "follower_id"
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 20161118203047) do
     t.string   "token"
     t.index ["token"], name: "index_posts_on_token"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "username_mentions", force: :cascade do |t|
+    t.integer  "post_id",      null: false
+    t.integer  "mentioned_id", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["mentioned_id"], name: "index_username_mentions_on_mentioned_id"
+    t.index ["post_id"], name: "index_username_mentions_on_post_id"
   end
 
   create_table "users", force: :cascade do |t|
