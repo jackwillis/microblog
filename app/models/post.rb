@@ -28,7 +28,10 @@ class Post < ApplicationRecord
   }
 
   scope :followed_posts_for, -> (user) {
-    joins(:user).where(users: { id: user.leaders })
+    leaders_posts = joins(:user).where(users: { id: user.leaders })
+    my_posts = joins(:user).where(users: { id: user })
+
+    leaders_posts.or(my_posts)
   }
 
   def hashtags
