@@ -13,3 +13,10 @@ FactoryGirl.define do
     password { rand.to_s }
   end
 end
+
+FactoryGirl.define do
+  factory :post do
+    body { SecureRandom.urlsafe_base64(rand(100) + 10) }
+    user
+  end
+end

@@ -55,3 +55,14 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+def with_activerecord_logging
+  return yield unless defined?(ActiveRecord::Base)
+
+  old_logger = ActiveRecord::Base.logger
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+  yield
+
+  ActiveRecord::Base.logger = old_logger
+end
