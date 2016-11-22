@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Microblog</title>
     <%= csrf_meta_tags %>
 
@@ -9,22 +13,31 @@
   </head>
 
   <body>
-    <h1><%= link_to 'microblog', root_path %></h1>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
-    <nav>
-      <% if user_signed_in? %>
-        You are logged in as <%= link_to "@#{current_user.username}", user_path(current_user) %>.
-        <%= link_to '(Sign out)', destroy_user_session_path, method: :delete %>.
-        <%= notifications_link %>.
-      <% else %>
-        Why not
-        <%= link_to 'log in', new_user_session_path %> or
-        <%= link_to 'sign up', new_user_registration_path %>.
-      <% end %>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link_to 'microblog', root_path, class: 'navbar-brand' %>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <% if user_signed_in? %>
+              <li><%= link_to "@#{current_user.username}", user_path(current_user) %></li>
+              <li><%= link_to '(Sign out)', destroy_user_session_path, method: :delete %></li>
+              <li><%= notifications_link %></li>
+              <li><%= link_to 'Compose', new_post_path %></li>
+            <% else %>
+              <li><%= link_to 'log in', new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </nav>
 
-    <%= yield %>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

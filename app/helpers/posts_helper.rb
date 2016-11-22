@@ -19,13 +19,13 @@ module PostsHelper
     time = post.created_at
     now = Time.zone.now
 
-    link = if now.ago(2.hours) < time
+    link = if now.ago(1.day + 6.hours) < time
       link_to(distance_of_time_in_words(time, now) + " ago", post)
     else
-      "on " + link_to(time.strftime("%a, %b %-d, %Y, %l:%S %p"), post)
+      "on " + link_to(time.strftime("%a, %b %-d, %l:%S %p"), post)
     end
 
-    time_tag time, link.html_safe, title: time.rfc2822
+    time_tag time.in_time_zone, link.html_safe, title: time.in_time_zone.rfc2822
   end
 
   def like_button(post)

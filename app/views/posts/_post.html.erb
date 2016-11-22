@@ -1,10 +1,10 @@
-<div class="post">
+<div class="panel panel-default">
   <header>
     <%= profile_link(post.user) %>
-    <small>posted <%= post_time_tag(post) %>:</small>
+    posted <%= post_time_tag(post) %>:
   </header>
 
-  <p><%= post_body_with_links(post) %></p>
+  <div class="panel-body"><%= post_body_with_links(post) %></div>
   
   <footer>
     <%= like_button(post) %>

@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 
   def index
     @posts = page(timeline_posts)
-    @post = Post.new
   end
 
   def hashtag
@@ -12,6 +11,10 @@ class PostsController < ApplicationController
 
     @posts = page(hashtag_posts)
     @posts_count = hashtag_posts.count
+  end
+
+  def new
+    @post = current_user.posts.new
   end
 
   # GET /posts/1

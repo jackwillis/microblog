@@ -1,3 +1,2 @@
-<%= profile_link(username_mention.post.user) %>
-mentioned you in their <%= link_to "post", post_path(username_mention.post) %>
-"<%= post_body_with_links(username_mention.post) %>"
+<div class="panel-heading"><%= profile_link(username_mention.post.user) %> mentioned you in their post:</div>
+<div class="panel-body"><%= render username_mention.post %></div>
